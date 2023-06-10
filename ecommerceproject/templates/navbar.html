@@ -1,0 +1,100 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+        <img src="{% static 'images/yoga.jpg' %}" alt="logimage" width="130px" height="100px"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" style="font-size:18px;" >
+          <a class="nav-link active" aria-current="page" href="{% url 'ecommerce:allProdCat' %}">Home</a>
+        </li>
+
+        <li class="nav-item dropdown" style="font-size:18px;" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Shop
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for c in links %}
+
+            <li><a class="dropdown-item" href="{{c.get_url}}">{{c.name}}</a></li>
+              {% endfor %}
+          </ul>
+        </li>
+        {% if item_count > 0 %}
+        <li class="nav-item" style="font-size:18px;"  >
+          <a class="nav-link" href="{% url 'cart:cart_detail' %}"><i class="fa-solid fa-cart-shopping" ></i>{{item_count}}</a>
+        </li>
+         {% endif %}
+      </ul>
+      <form class="d-flex" action="{% url 'search_app:SearchResult' %}" method="get">
+        {% csrf_token %}
+        <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </form>
+    </div>
+  </div>
+</nav>
+<!--{% load static %}-->
+<!--<nav style="height:90px;width:100%;" class="navbar navbar-expand-lg navbar-dark bg-dark me-auto">-->
+<!--  <a class="navbar-brand" href="#">-->
+<!--    <img src="{% static 'images/yoga.jpg' %}" alt="logimage" width="130px" height="100px"></a>-->
+<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--    <span class="navbar-toggler-icon"></span>-->
+<!--  </button>-->
+
+<!--  <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--    <ul class="navbar-nav me-auto">-->
+<!--      <li class="nav-item active me-auto" style="font-size:18px;">-->
+<!--        <a class="nav-link" href="{% url 'ecommerce:allProdCat' %}">AllProducts-->
+<!--          </a>-->
+<!--      </li>-->
+<!--      <li class="nav-item me-auto" style="font-size:18px;">-->
+<!--        <a class="nav-link" href="#">ShoppingCart</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item dropdown me-auto" style="font-size:18px;">-->
+<!--{% for c in links %}-->
+<!--        <a class="nav-link dropdown-toggle" href="{{c.get_url}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--          Categories-->
+<!--        </a>-->
+<!--        <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--          <a class="dropdown-item" href="#">{{c.name}}</a>-->
+<!--        </div>{% endfor %}-->
+<!--      </li>-->
+<!--    </ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--    <form class="form-inline my-2 my-lg-0">-->
+<!--      <table>-->
+<!--        <tr>-->
+<!--          <th>-->
+<!--      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"><br>-->
+<!--        </th>-->
+
+<!--          <th>-->
+
+<!--          </th>-->
+<!--        </tr></table>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</nav>-->
+<!--<nav>-->
+<!--    <ul>-->
+<!--        <li>-->
+<!--            <a href="{% url 'ecommerce:allProdCat' %}">All Products</a>-->
+<!--        </li>-->
+<!--        {% for c in links %}-->
+<!--        <li>-->
+<!--            <a href="{{c.get_url}}"></a>-->
+<!--        </li>-->
+<!--        {% endfor %}-->
+<!--        <li>-->
+
+<!--            Your Cart()-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</nav>-->

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+{{ category.discription|truncatewords:155 }}
+{% endblock %}
+{% block title %}
+{% if category %}
+{{product.name}}-YOGASAN
+{% endif %}
+{% endblock %}
+{% block content %}
+{% if product %}
+<div class="row my-prod-row-class">
+ <div class="mx-auto">
+  <p><a href="{% url 'ecommerce:allProdCat' %}">Home</a>|
+   <a href="{{product.category.get_url}}">{{product.category.name}}</a>|
+   {{product.name}}</p>
+ </div>
+</div>
+{% endif %}
+<div class="container">
+<div class="row">
+ <div class="col">
+  <div style="min-width:18rem;">
+   {% if product %}
+   <img src="{{product.image.url}}" alt="{{product.name}}">
+  </div>
+ </div>
+<div class="col">
+<div >
+ <h1 class="my-prod-title" style="font-size:32px;">{{product.name}}</h1>
+ <div>
+ <P class="my-title">{{product.price}}</P>
+ <p class="text-justify my-prod-text">{{product.description}}</p>
+  {% endif %}
+ {% if product.stock <= 0 %}
+ <p class="text-justify my-prod-text"><b>OUT of Stock</b></p>
+ {% else %}<br><br><br>
+ <a class="btn btn-secondary" href="{% url 'cart:add_cart' product.id %}">Add To Cart</a>
+ {% endif %}
+</div>
+ </div></div></div></div>
+{% endblock %}
